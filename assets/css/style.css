@@ -8,7 +8,7 @@ label {
   display: grid;
   width: 960px;
   min-height: 100px;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(7, 1fr);
   margin: 0 auto;
 }
 
@@ -38,9 +38,9 @@ label {
 	color: #fff;
 	background: #226fbe;
 	cursor: pointer;
-	padding: 12px 40px;
-	display: inline-block;
-	margin: 15px 30px;
+	padding: 12px 14px;
+	display: inline;
+	margin: 2px 5px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-weight: 700;
@@ -48,7 +48,7 @@ label {
 	position: relative;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
-	transition: all 0.3s;
+  transition: all 0.3s;  
 }
 
 .button:active {
@@ -67,3 +67,4 @@ label {
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
 }
+
