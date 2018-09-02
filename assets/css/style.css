@@ -1,0 +1,26 @@
+.button-container {
+  display: grid;
+  width: 960px;
+  min-height: 100px;
+  grid-template-columns: 1fr;
+  margin: 0 auto;
+}
+
+
+.content-container {
+  display: grid;
+  width: 960px;
+  grid-template-columns: 3fr 1fr;
+  margin: 0 auto;
+  justify-content: center;
+
+}
+
+.submit-area {
+  grid-column: 2 / 3;
+}
+
+.button-area {
+  grid-column: 1 / 2;
+}
+
