@@ -1,3 +1,9 @@
+label {
+  font-weight: bold;
+}
+
+
+
 .button-container {
   display: grid;
   width: 960px;
@@ -24,3 +30,40 @@
   grid-column: 1 / 2;
 }
 
+.button {
+  border: 2px dotted #226fbe;
+  border-radius: 15px;
+	font-family: inherit;
+	font-size: inherit;
+	color: #fff;
+	background: #226fbe;
+	cursor: pointer;
+	padding: 12px 40px;
+	display: inline-block;
+	margin: 15px 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.button:active {
+  top: 2px;
+}
+
+.button:hover {
+  background: transparent;
+  color: #226fbe;
+}
+.button:after {
+  content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
