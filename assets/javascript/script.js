@@ -28,14 +28,22 @@
       url: giphyURL + topic
     }).then(function(response) {
       var gifArray = response.data;
-      gifArray.forEach(element => console.log(element));
+      gifArray.forEach(element => popGifs(element.images.downsized_still.url, element.rating));
     })
   }
   
   
 
-  // Function to create and attach a div containing an image and information
-  var popGifs = function() {};
+  // Function to create and attach a div containing an image and rating
+  var popGifs = function(image, rating) {
+    // create an empty div
+    var gifBox = $('<div>').addClass('gif-box');
+    // append the supplied rating and image
+    $('<label> Rating: ' + rating + '</>').addClass('gif-box-label').appendTo(gifBox);
+    $('<img>').attr('src', image).addClass('gif-box-img').appendTo(gifBox);
+    // append that div to the gif area
+    gifBox.appendTo($('.content-container'));
+  };
 
 
 

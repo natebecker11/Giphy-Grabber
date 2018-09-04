@@ -1,9 +1,9 @@
+/* Label for submit box and gifs */
 label {
   font-weight: bold;
 }
 
-
-
+/* Grid area for content buttons */
 .button-container {
   display: grid;
   width: 960px;
@@ -12,23 +12,22 @@ label {
   margin: 0 auto;
 }
 
-
+/* Grid area for gifs and for submit area, then sub-areas for each */
 .content-container {
-  display: grid;
-  width: 960px;
-  grid-template-columns: 3fr 1fr;
-  margin: 0 auto;
-  justify-content: center;
-
+  display: inline-grid;
+  width: 640px;
+  grid-template-columns: 360px 360px;   
 }
 
 .submit-area {
-  grid-column: 2 / 3;
+  display: inline-grid;
+  width: 320px;
+  grid-template-columns: 1fr;
 }
 
-.button-area {
-  grid-column: 1 / 2;
-}
+
+
+/* basic button styling */
 
 .button {
   border: 2px dotted #226fbe;
@@ -68,3 +67,27 @@ label {
 	transition: all 0.3s;
 }
 
+/* Class for the div containing a gif and its rating */
+.gif-box {
+  position: relative;
+  width: 350px;
+  height: 250px;
+  border: 1px solid magenta;  
+  
+}
+
+/* Class for gifs themselves */
+.gif-box-img {
+  position: absolute;
+  bottom: 0;
+  max-height: 225px;
+  width: auto;
+  max-width: 350px;
+}
+
+/* Class for the gif rating labels */
+.gif-box-label {
+  position: absolute;
+  top: 0;
+  
+}
