@@ -28,7 +28,7 @@ $(document).ready(function() {
       url: giphyURL + topic
     }).then(function(response) {
       var gifArray = response.data;
-      // console.log(response.data);
+      console.log(response.data);
       gifArray.forEach(element => popGifs(element.images.downsized_still.url, element.images.downsized_medium.url, element.rating));
       // gifArray.forEach(element => console.log(element.images.downsized_small.url));
 

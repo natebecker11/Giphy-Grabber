@@ -1,6 +1,30 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+  color: white;
+}
+
 /* Label for submit box and gifs */
 label {
   font-weight: bold;
+  color: black;
+}
+
+/* header styling */
+.header-box {
+  border: 3px solid #be8522;
+  border-radius: 15px;
+  background-color: #be3722;
+  width: 960px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 40px;
 }
 
 /* Grid area for content buttons */
