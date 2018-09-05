@@ -83,8 +83,8 @@ $(document).ready(function() {
   // event listener for the submit button
   $(document).on('click', '#submitButton', function() {
     var search = $('#animalInput').val().trim();
-    if (search && !btnArray.includes(search)) {
-      btnArray.push(search);
+    if (search && !btnArray.includes(search.toLowerCase())) {      
+      btnArray.push(search.toLowerCase());
       $('.button-container').empty();
       renderButtons();
     }
