@@ -29,7 +29,7 @@ $(document).ready(function() {
     }).then(function(response) {
       var gifArray = response.data;
       console.log(response.data);
-      gifArray.forEach(element => popGifs(element.images.downsized_still.url, element.images.downsized_medium.url, element.rating));
+      gifArray.forEach(element => popGifs(element.images.fixed_width_still.url, element.images.fixed_width.url, element.rating));
       // gifArray.forEach(element => console.log(element.images.downsized_small.url));
 
     })
@@ -43,7 +43,7 @@ $(document).ready(function() {
     var gifBox = $('<div>')
       .addClass('gif-box');
     // append the supplied rating and image
-    $('<label> Rating: ' + rating + '</>')
+    $('<label> Rating: ' + rating.toUpperCase() + '</>')
       .addClass('gif-box-label')
       .appendTo(gifBox);
     $('<img>')

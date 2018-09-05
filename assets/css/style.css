@@ -6,7 +6,7 @@ body {
 /* Label for submit box and gifs */
 label {
   font-weight: bold;
-  color: black;
+  color: white;
 }
 
 /* header styling */
@@ -41,16 +41,26 @@ h1 {
 .content-container {
   display: grid;
   width: 960px;
-  grid-template-columns: 360px 360px 240px;
+  grid-template-columns: repeat(3, 1fr);
   row-gap: 10px;
   margin: 0 auto;
+  border: 3px solid #be8522;
+  border-radius: 15px;
+  background-color: #be3722;
+  min-height: 375px;
 }
 
 .submit-area {
   grid-column: 3 / 4;
-  grid-row: 1 / 8;
+  grid-row: 1 / 2;
+  text-align:center;
+  padding: 5px;
+  
 }
 
+.submit-area label, .submit-area input {
+  margin-bottom: 5px;
+}
 
 
 /* basic button styling */
@@ -93,27 +103,34 @@ h1 {
 	transition: all 0.3s;
 }
 
+.submit-area .button:hover {
+  background: #fff;
+}
+
 /* Class for the div containing a gif and its rating */
 .gif-box {
   position: relative;
-  width: 350px;
+  width: 300px;
   height: 250px;
-  border: 1px solid magenta;  
+  /* border: 1px solid magenta;   */
   
 }
 
 /* Class for gifs themselves */
 .gif-box-img {
   position: absolute;
-  bottom: 0;
-  max-height: 225px;
-  width: auto;
-  max-width: 350px;
+  top: 24px;
+  left: 75px;
+  max-height: 225px;  
+  /* max-width: 350px; */
+  border: 3px solid #be8522;
 }
 
 /* Class for the gif rating labels */
 .gif-box-label {
   position: absolute;
   top: 0;
+  left: 135px;
+  
   
 }
