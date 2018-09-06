@@ -171,7 +171,17 @@ h1 {
   }
 
   .submit-area {
-    grid-column: 1 / 2;
-    
+    grid-column: 1 / 2;    
+  }
+
+  .gif-box {
+    max-width: 80%;    
+  }
+
+  .gif-box-img {
+    left: 15%;
+  }
+  .gif-box-label{
+    left: 38%;
   }
 }
