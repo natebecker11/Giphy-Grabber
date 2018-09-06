@@ -165,6 +165,10 @@ h1 {
 }
 /* responsive for cell phones */
 @media screen and (max-width: 640px)  {
+  .button-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  
   .content-container {
     grid-template-columns: 1fr;
     justify-items: center;
