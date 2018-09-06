@@ -83,13 +83,23 @@ $(document).ready(function() {
   // event listener for the submit button
   $(document).on('click', '#submitButton', function() {
     var search = $('#animalInput').val().trim();
-    if (search && !btnArray.includes(search.toLowerCase())) {      
+    // control for extra-long inputs
+    if (search.length > 12) {
+      $('#animalInput').val('').attr('placeholder', '12 Characters! For Real!');
+    }
+    // make sure a search term is entered and that it's not already a button
+    else if (search && !btnArray.includes(search.toLowerCase())) {      
       btnArray.push(search.toLowerCase());
+      $('#animalInput').val('');
       $('.button-container').empty();
       renderButtons();
     }
   })
 
+  // event listener to replace placeholder on click
+  $(document).on('click', '#animalInput', function() {
+    $(this).attr('placeholder', '');
+  })
   // Call the function to populate the initial buttons
   renderButtons();
 })

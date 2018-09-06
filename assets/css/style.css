@@ -134,3 +134,44 @@ h1 {
   
   
 }
+
+
+/* responsive for landscape tablets */
+@media screen and (max-width: 980px){
+  .header-box, .button-container, .content-container {
+    max-width: 98%;
+  }
+
+  .button-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .content-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .submit-area {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+  }
+} 
+
+/* responsive for portrait tablets */
+@media screen and (max-width: 768px) {
+  .button-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+/* responsive for cell phones */
+@media screen and (max-width: 640px)  {
+  .content-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .submit-area {
+    grid-column: 1 / 2;
+    
+  }
+}
