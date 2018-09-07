@@ -29,7 +29,7 @@ $(document).ready(function() {
     }).then(function(response) {
       var gifArray = response.data;
       console.log(response.data);
-      gifArray.forEach(element => popGifs(element.images.fixed_width_still.url, element.images.fixed_width.url, element.rating));
+      gifArray.forEach(element => popGifs(element.images.fixed_width_still.url, element.images.fixed_width.url, element.rating, element.title));
       // gifArray.forEach(element => console.log(element.images.downsized_small.url));
 
     })
@@ -38,14 +38,16 @@ $(document).ready(function() {
   
 
   // Function to create and attach a div containing an image and rating
-  var popGifs = function(image1, image2, rating) {
+  var popGifs = function(image1, image2, rating, title) {
+
     // create an empty div
     var gifBox = $('<div>')
       .addClass('gif-box');
-    // append the supplied rating and image
-    $('<label> Rating: ' + rating.toUpperCase() + '</>')
-      .addClass('gif-box-label')
+    // append the supplied rating 
+    $('<label> Rating: ' + rating.toUpperCase() + ' </>')
+      .addClass('gif-box-label')      
       .appendTo(gifBox);
+    // append the supplied image
     $('<img>')
       .attr({
         'src': image1,
@@ -54,6 +56,30 @@ $(document).ready(function() {
       })
       .addClass('gif-box-img gif-box-still')
       .appendTo(gifBox);
+    // create a favorite icon
+    var icon = $('<i class="fa-heart fa-lg gif-box-fav"> </i>')
+      // store relevant info to be stored on icon click 
+      // TODO: to reduce redundancy, store all this on the img element 
+      // TODO: and point corresponding functions there
+      .attr({
+        'move-src': image2,
+        'still-src': image1,
+        'rating': rating.toUpperCase(),
+        'data-title': title,
+        'title': 'Add To Favorites'
+      });
+    // check whether the gif is already favorited
+    if (localStorage[title]) {
+      // if it is, render a solid heart and add the correct class
+      console.log(title + ' is a fav')
+      icon.addClass('yes-selected fas');
+    }
+    else {
+      // render an empty heart and add the correct class
+      console.log(title + ' is not a fav')
+      icon.addClass('not-selected far')
+    }
+    icon.appendTo(gifBox);
     // append that div to the gif area
     gifBox.appendTo($('.content-container'));
   };
@@ -100,6 +126,46 @@ $(document).ready(function() {
   $(document).on('click', '#animalInput', function() {
     $(this).attr('placeholder', '');
   })
+
+  // event listener to change the look of fav icons on hover
+  $(document).on('mouseenter', '.gif-box-fav', function() {
+    if ($(this).hasClass('not-selected')) {
+      $(this).addClass('fas').removeClass('far');
+    }
+  })
+  $(document).on('mouseleave', '.gif-box-fav', function() {
+    if ($(this).hasClass('not-selected')) {
+      $(this).addClass('far').removeClass('fas');
+    }    
+  })
+
+  // event listener to store a favorite gif
+  $(document).on('click', '.gif-box-fav', function() {
+    var title = $(this).attr('data-title');
+    if ($(this).hasClass('not-selected')) {
+      console.log('stored');
+      var storedImage = JSON.stringify({
+        stillURL: $(this).attr('still-src'),
+        moveURL: $(this).attr('move-src'),
+        rating: $(this).attr('rating'),
+        desc: title
+      });
+      console.log(storedImage);
+      localStorage.setItem(title, storedImage);
+      $(this)
+        .addClass('yes-selected')
+        .removeClass('not-selected')
+        .attr('title', 'Remove From Favorites');
+    } else {
+      console.log('removed');
+      localStorage.removeItem(title)
+      $(this)
+        .addClass('not-selected')
+        .removeClass('yes-selected')
+        .attr('title', 'Add To Favorites');
+    }
+  })
+
   // Call the function to populate the initial buttons
   renderButtons();
 })
