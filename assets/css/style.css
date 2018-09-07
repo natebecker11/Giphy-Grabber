@@ -3,6 +3,12 @@ body {
   color: white;
 }
 
+hr {
+  width: 80%;
+  border-color: #be8522;
+  height: 1px;
+  
+}
 /* Label for submit box and gifs */
 label {
   font-weight: bold;
@@ -163,6 +169,10 @@ h1 {
   .submit-area {
     grid-column: 1 / 3;
     grid-row: 1 / 2;
+  }
+  .button:hover {
+    background: #226fbe;
+    color: white;
   }
 } 
 

@@ -15,7 +15,7 @@ $(document).ready(function() {
   var renderButtons = function() {
     btnArray.forEach(function(element) {
       $('<button>')
-        .addClass('button animal-btn')
+        .addClass('button content-btn')
         .attr('data-name', element)
         .text(element)
         .appendTo($('.button-container'))
@@ -30,16 +30,10 @@ $(document).ready(function() {
       var gifArray = response.data;
       console.log(response.data);
       gifArray.forEach(element => popGifs(element.images.fixed_width_still.url, element.images.fixed_width.url, element.rating, element.title));
-      // gifArray.forEach(element => console.log(element.images.downsized_small.url));
-
     })
   }
-  
-  
-
   // Function to create and attach a div containing an image and rating
   var popGifs = function(image1, image2, rating, title) {
-
     // create an empty div
     var gifBox = $('<div>')
       .addClass('gif-box');
@@ -71,12 +65,10 @@ $(document).ready(function() {
     // check whether the gif is already favorited
     if (localStorage[title]) {
       // if it is, render a solid heart and add the correct class
-      console.log(title + ' is a fav')
       icon.addClass('yes-selected fas');
     }
     else {
       // render an empty heart and add the correct class
-      console.log(title + ' is not a fav')
       icon.addClass('not-selected far')
     }
     icon.appendTo(gifBox);
@@ -85,7 +77,7 @@ $(document).ready(function() {
   };
 
   // event listener for content buttons
-  $(document).on('click', '.animal-btn', function() {
+  $(document).on('click', '.content-btn', function() {
     $('.gif-box').remove();
     grabGifs($(this).attr('data-name'));
   })
@@ -108,22 +100,22 @@ $(document).ready(function() {
 
   // event listener for the submit button
   $(document).on('click', '#submitButton', function() {
-    var search = $('#animalInput').val().trim();
+    var search = $('#contentInput').val().trim();
     // control for extra-long inputs
     if (search.length > 12) {
-      $('#animalInput').val('').attr('placeholder', '12 Characters! For Real!');
+      $('#contentInput').val('').attr('placeholder', '12 Characters! For Real!');
     }
     // make sure a search term is entered and that it's not already a button
     else if (search && !btnArray.includes(search.toLowerCase())) {      
       btnArray.push(search.toLowerCase());
-      $('#animalInput').val('');
+      $('#contentInput').val('');
       $('.button-container').empty();
       renderButtons();
     }
   })
 
   // event listener to replace placeholder on click
-  $(document).on('click', '#animalInput', function() {
+  $(document).on('click', '#contentInput', function() {
     $(this).attr('placeholder', '');
   })
 
@@ -141,29 +133,47 @@ $(document).ready(function() {
 
   // event listener to store a favorite gif
   $(document).on('click', '.gif-box-fav', function() {
+    // grab the title from the html
     var title = $(this).attr('data-title');
+    // check ensure its not already a favorite
     if ($(this).hasClass('not-selected')) {
-      console.log('stored');
+      // create a JSON string to describe the image      
       var storedImage = JSON.stringify({
         stillURL: $(this).attr('still-src'),
         moveURL: $(this).attr('move-src'),
         rating: $(this).attr('rating'),
         desc: title
       });
-      console.log(storedImage);
+      // add that string to local storage with the title as the key
       localStorage.setItem(title, storedImage);
+      // change the icon to indicate the item is a favorite
       $(this)
         .addClass('yes-selected')
         .removeClass('not-selected')
         .attr('title', 'Remove From Favorites');
+    // if it IS already a favorite
     } else {
-      console.log('removed');
+      // delete it from local storage     
       localStorage.removeItem(title)
+      // change the icon back to default
       $(this)
         .addClass('not-selected')
         .removeClass('yes-selected')
         .attr('title', 'Add To Favorites');
     }
+  })
+
+  // event listener to display favorite gifs
+  $(document).on('click', '#favoritesButton', function() {
+    // clear displayed gifs
+    $('.gif-box').remove();
+    // get the titles of the favorited gifs, which are also their keys
+    var storageKeys = Object.keys(localStorage);
+    // use the keys to build a button for each
+    storageKeys.forEach(function(element) {
+      var gifInfo = JSON.parse(localStorage[element]);      
+      popGifs(gifInfo['stillURL'], gifInfo['moveURL'], gifInfo['rating'], gifInfo['desc'])
+    })    
   })
 
   // Call the function to populate the initial buttons
