@@ -4,8 +4,7 @@
   var giphyURL = 'https://api.giphy.com/v1/gifs/search?api_key=7hJ5lkwBZeB2hPC155fMmCXmVoMgsylI&limit=10&q=';
 
   // Array for buttons
-  var btnArray = ['lions', 'tigers', 'bears', 'cheetahs', 'buffalo', 'panthers', 'donkeys',
-'dogs', 'cats', 'hamsters', 'wolves', 'foxes', 'velociraptors','snuffleupagus']
+  var btnArray = ['javier baez', 'kris bryant', 'anthony rizzo', 'ernie banks', 'david ross', 'bill murray', 'jon lester', 'sammy sosa', 'kyle schwarber', 'jason heyward', 'ben zobrist', 'willson contreras', 'addison russell', 'kyle hendricks']
 
 // Global Functions
 
@@ -25,7 +24,7 @@ $(document).ready(function() {
   // Function to make an API call when a button is pressed
   var grabGifs = function(topic) {
     $.get({
-      url: giphyURL + topic
+      url: giphyURL + topic + ' cubs'
     }).then(function(response) {
       var gifArray = response.data;
       console.log(response.data);
@@ -101,12 +100,13 @@ $(document).ready(function() {
   // event listener for the submit button
   $(document).on('click', '#submitButton', function() {
     var search = $('#contentInput').val().trim();
-    // control for extra-long inputs
-    if (search.length > 12) {
-      $('#contentInput').val('').attr('placeholder', '12 Characters! For Real!');
-    }
+    // // control for extra-long inputs REMOVED no longer needed
+    // if (search.length > 12) {
+    //   $('#contentInput').val('').attr('placeholder', '12 Characters! For Real!');
+    // } else
     // make sure a search term is entered and that it's not already a button
-    else if (search && !btnArray.includes(search.toLowerCase())) {      
+     
+    if (search && !btnArray.includes(search.toLowerCase())) {      
       btnArray.push(search.toLowerCase());
       $('#contentInput').val('');
       $('.button-container').empty();
