@@ -67,7 +67,7 @@ $(document).ready(function() {
         'title': 'Add To Favorites'
       });
     // check whether the gif is already favorited
-    if (localStorage[title]) {
+    if (localStorage[image1]) {
       // if it is, render a solid heart and add the correct class
       icon.addClass('yes-selected fas');
     }
@@ -149,8 +149,8 @@ $(document).ready(function() {
 
   // event listener to store a favorite gif
   $(document).on('click', '.gif-box-fav', function() {
-    // grab the title from the html
-    var title = $(this).attr('data-title');
+    // grab the still URL from the html
+    var title = $(this).attr('still-src');
     // check ensure its not already a favorite
     if ($(this).hasClass('not-selected')) {
       // create a JSON string to describe the image      
