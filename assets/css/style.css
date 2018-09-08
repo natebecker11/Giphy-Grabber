@@ -48,6 +48,7 @@ h1 {
   grid-template-columns: repeat(3, 1fr);
   row-gap: 10px;
   margin: 0 auto;
+  margin-bottom: 10px;
   border: 3px solid #0E3386;
   border-radius: 15px;
   background-color: #CC3433;
@@ -150,9 +151,26 @@ h1 {
   font-size: 140%;
 }
 
+/* class to hide an element */
+.hidden {
+  display: none;
+}
+
+/* class for wide button div */
+.wide-btn-div {  
+  width: 960px;
+  margin: 0 auto;  
+}
+
+/* class for wide button */
+.wide-btn {
+  width: 100%;
+  margin: 0 auto;
+}
+
 /* responsive for landscape tablets */
 @media screen and (max-width: 980px){
-  .header-box, .button-container, .content-container {
+  .header-box, .button-container, .content-container, .wide-btn-div {
     max-width: 98%;
   }
 

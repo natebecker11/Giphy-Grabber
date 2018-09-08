@@ -6,7 +6,7 @@ Users will be able to click on one of the buttons on the screen, and on doing so
 
 ## Stretch Features
 - [x] Users can add gifs they find to a 'favorites' section. This uses localStorage to persist between sessions.
-- [ ] Users can request additional gifs to be added to the screen
-- [ ] Additional info for each gif will be displayed 
+- [x] Users can request additional gifs to be added to the screen
+- [ ] Ability to see full-size gif in new window 
 - [ ] 1-click download button for each gif
 

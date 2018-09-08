@@ -6,6 +6,11 @@
   // Array for buttons
   var btnArray = ['javier baez', 'kris bryant', 'anthony rizzo', 'ernie banks', 'david ross', 'bill murray', 'jon lester', 'sammy sosa', 'kyle schwarber', 'jason heyward', 'ben zobrist', 'willson contreras', 'addison russell', 'kyle hendricks']
 
+  // Counter for how many gifs (divided by 10) have been displayed
+  var gifCount = 0;
+
+  // Variable to store the current topic
+  var currentTopic = '';
 // Global Functions
 
 $(document).ready(function() {
@@ -21,10 +26,10 @@ $(document).ready(function() {
     })
   }
 
-  // Function to make an API call when a button is pressed
-  var grabGifs = function(topic) {
+  // Function to make an API call when a button is pressed. topic = the requested topic, setCount is how many gifs (divided by 10) have already been displayed
+  var grabGifs = function(topic, setCount = 0) {
     $.get({
-      url: giphyURL + topic + ' cubs'
+      url: giphyURL + topic + ' cubs&offset=' + setCount * 10
     }).then(function(response) {
       var gifArray = response.data;
       console.log(response.data);
@@ -77,8 +82,19 @@ $(document).ready(function() {
 
   // event listener for content buttons
   $(document).on('click', '.content-btn', function() {
+    // get the corresponding topic
+    var thisTopic = $(this).attr('data-name');
+    // empty the gif box area
     $('.gif-box').remove();
-    grabGifs($(this).attr('data-name'));
+    // populate with appropriate gifs
+    grabGifs(thisTopic);
+    // increase the counter of gifs shown
+    gifCount = 1;
+    // display the 'more gifs' button
+    $('.wide-btn-div').removeClass('hidden');
+    // flag thistopic globally
+    currentTopic = thisTopic;
+
   })
 
   // event listener to play gifs on click
@@ -169,11 +185,20 @@ $(document).ready(function() {
     $('.gif-box').remove();
     // get the titles of the favorited gifs, which are also their keys
     var storageKeys = Object.keys(localStorage);
-    // use the keys to build a button for each
+    // use the keys to build a gif-div for each
     storageKeys.forEach(function(element) {
       var gifInfo = JSON.parse(localStorage[element]);      
       popGifs(gifInfo['stillURL'], gifInfo['moveURL'], gifInfo['rating'], gifInfo['desc'])
-    })    
+    })
+    // hide the more gifs button
+    $('.wide-btn-div').addClass('hidden');
+  })
+
+  // event listener to grab additional gifs
+  $(document).on('click', '#moreGifsButton', function() {
+    grabGifs(currentTopic, gifCount);
+    gifCount++;
+
   })
 
   // Call the function to populate the initial buttons
